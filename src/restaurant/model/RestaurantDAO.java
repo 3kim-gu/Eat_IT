@@ -21,7 +21,8 @@ public class RestaurantDAO {
 //			ArrayList<RestaurantDTO> rd = RestaurantDAO.selectRestaurantByCategory("양식");
 //			ArrayList<RestaurantDTO> rd = RestaurantDAO.selectRestaurantByPrice(5000, 10000);
 //			ArrayList<RestaurantDTO> rd = selectRestaurantByDistance(5);
-			RestaurantDTO rd = selectRestaurantByRname("이");
+//			RestaurantDTO rd = selectRestaurantByRname("이");
+			ArrayList<RestaurantDTO> rd = selectRestaurantByCategoryAndPrice("양식", 0, 15000);
 			System.out.println(rd);
 		} catch (SQLException e) {
 			System.out.println("예외처리오류");
@@ -62,7 +63,7 @@ public class RestaurantDAO {
 		return restaurant;
 	}
 //	2. 가격 범위로 음식점 검색
-	public static ArrayList<RestaurantDTO> selectRestaurantByPrice(int row, int high) throws SQLException {
+	public static ArrayList<RestaurantDTO> selectRestaurantByPrice(int low, int high) throws SQLException {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -70,8 +71,8 @@ public class RestaurantDAO {
 
 		try {
 			conn = DBUtil.getConnection();
-			pstmt = conn.prepareStatement("select * from restaurant where price >= ? and price <= ?");
-			pstmt.setInt(1, row);
+			pstmt = conn.prepareStatement("select * from restaurant where price>=? and price<=?");
+			pstmt.setInt(1, low);
 			pstmt.setInt(2, high);
 			rs = pstmt.executeQuery();
 			while (rs.next()) {
@@ -104,7 +105,7 @@ public class RestaurantDAO {
 
 		try {
 			conn = DBUtil.getConnection();
-			pstmt = conn.prepareStatement("select * from restaurant where distance <= ?");
+			pstmt = conn.prepareStatement("select * from restaurant where distance<=?");
 			pstmt.setInt(1, min);
 			rs = pstmt.executeQuery();
 			while (rs.next()) {
@@ -161,6 +162,40 @@ public class RestaurantDAO {
 	}
 //	5. 가격, 거리 기준으로 음식점 검색
 //	6. 카테고리, 가격 기준으로 음식점 검색
+	public static ArrayList<RestaurantDTO> selectRestaurantByCategoryAndPrice(String category, int low, int high) throws SQLException {
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		ArrayList<RestaurantDTO> restaurant = new ArrayList<>();
+
+		try {
+			conn = DBUtil.getConnection();
+			pstmt = conn.prepareStatement("select * from restaurant where category=? and price>=? and price<=?");
+			pstmt.setString(1, category);
+			pstmt.setInt(2, low);
+			pstmt.setInt(3, high);
+			rs = pstmt.executeQuery();
+			while (rs.next()) {
+				restaurant.add(
+						RestaurantDTO.builder()
+						.rname(rs.getString(1))
+						.category(rs.getString(2))
+						.food(rs.getString(3))
+						.price(rs.getInt(4))
+						.distance(rs.getInt(5))
+						.waiting_time(rs.getInt(6))
+						.is_able_group(rs.getString(7))
+						.score(rs.getFloat(8))
+						.review(rs.getString(9))
+						.url(rs.getString(10))
+						.build()
+						);
+			}
+		} finally {
+			DBUtil.close(conn, pstmt, rs);
+		}
+		return restaurant;
+	}
 //	7. 전체검색
 //	8. 상호명 조건으로 업데이트
 //	9. 상호명 조건으로 삭제
@@ -201,7 +236,7 @@ public class RestaurantDAO {
 	        pstmt.setInt(5, restaurant.getDistance());
 	        pstmt.setInt(6, restaurant.getWaiting_time()); 
 	        pstmt.setString(7, restaurant.getIs_able_group());
-	        pstmt.setInt(8, restaurant.getScore());
+	        pstmt.setFloat(8, restaurant.getScore());
 	        pstmt.setString(9, restaurant.getReview());
 	        pstmt.setString(10, restaurant.getUrl());
 
