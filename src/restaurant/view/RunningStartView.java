@@ -1,6 +1,7 @@
 package restaurant.view;
 
 import restaurant.controller.RestaurantController;
+import restaurant.domain.RestaurantDTO;
 
 public class RunningStartView {
 
@@ -33,17 +34,55 @@ public class RunningStartView {
 		System.out.println("---- DML ----");
 		System.out.println("7. 음식점 추가");
 		RestaurantController.selectAllRestaurant();
-		RestaurantController.insertRestaurantByCategory("양식");
+		RestaurantDTO.builder()
+			.rname()
+			.category()
+			.food()
+			.price()
+			.distance()
+			.waiting_time()
+			.is_able_group()
+			.score()
+			.review()	
+			.url()
+			.build()
+		RestaurantController.insertRestaurant(
+				RestaurantDTO.builder()
+					.rname("Test1")
+					.category("tcate")
+					.food("tfood")
+					.price(9999)
+					.distance(10)
+					.waiting_time(9)
+					.is_able_group(true)
+					.score(5)
+					.review(null)	
+					.url("url")
+					.build()
+				);
 		RestaurantController.selectAllRestaurant();
 		
 		System.out.println("7. 음식점 이름으로 음식점 업데이트");
 		RestaurantController.selectAllRestaurant();
-		RestaurantController.updateRestaurantByCategory("양식");
+		RestaurantController.updateRestaurantByRname(
+				"도락", 
+				RestaurantDTO.builder()
+					.category("tcate2")
+					.food("tfood2")
+					.price(9998)
+					.distance(20)
+					.waiting_time(19)
+					.is_able_group(false)
+					.score(1)
+					.review("hi")	
+					.url("url2")
+					.build()
+				);
 		RestaurantController.selectAllRestaurant();
 		
 		System.out.println("8. 음식점 이름으로 음식점 삭제");
 		RestaurantController.selectAllRestaurant();
-		RestaurantController.deleteRestaurantByCategory("양식");
+		RestaurantController.deleteRestaurantByRname("도락");
 		RestaurantController.selectAllRestaurant();
 		
 		
