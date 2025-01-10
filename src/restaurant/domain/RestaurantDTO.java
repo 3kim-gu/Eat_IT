@@ -20,7 +20,7 @@ public class RestaurantDTO {
 	private int distance;
 	private int waiting_time;
 	private String is_able_group;
-	private int score;
+	private float score;
 	private String review;
 	private String url;
 }

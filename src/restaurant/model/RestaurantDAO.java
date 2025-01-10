@@ -9,6 +9,8 @@ import java.util.ArrayList;
 
 import org.junit.Test;
 
+import lombok.Builder;
+
 import java.sql.SQLException;
 
 import restaurant.domain.RestaurantDTO;
@@ -21,7 +23,8 @@ public class RestaurantDAO {
 //			ArrayList<RestaurantDTO> rd = RestaurantDAO.selectRestaurantByCategory("양식");
 //			ArrayList<RestaurantDTO> rd = RestaurantDAO.selectRestaurantByPrice(5000, 10000);
 //			ArrayList<RestaurantDTO> rd = selectRestaurantByDistance(5);
-			RestaurantDTO rd = selectRestaurantByRname("이");
+//			RestaurantDTO rd = selectRestaurantByRname("이");
+			ArrayList<RestaurantDTO> rd = RestaurantDAO.selectRestaurantByCategoryAndPrice("양식", 0, 15000);
 			System.out.println(rd);
 		} catch (SQLException e) {
 			System.out.println("예외처리오류");
@@ -160,6 +163,42 @@ public class RestaurantDAO {
 		return restaurant;
 	}
 //	5. 가격, 거리 기준으로 음식점 검색
+	// select * from restaurant where category = ? and price 
+	public static ArrayList<RestaurantDTO> selectRestaurantByCategoryAndPrice(String category, int low, int high) throws SQLException {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		ArrayList<RestaurantDTO> restaurant = new ArrayList<>();
+	
+		try {
+			con = DBUtil.getConnection();
+			pstmt = con.prepareStatement("select * from restaurant where category = ? and price >= ? and price <= ?");
+			pstmt.setString(1, category);
+			pstmt.setInt(2, low);
+			pstmt.setInt(3, high);
+			rset = pstmt.executeQuery();
+			while (rset.next()) {
+				restaurant.add(
+						RestaurantDTO.builder()
+						.rname(rset.getString(1))
+						.category(rset.getString(2))
+						.food(rset.getString(3))
+						.price(rset.getInt(4))
+						.distance(rset.getInt(5))
+						.waiting_time(rset.getInt(6))
+						.is_able_group(rset.getString(7))
+						.score(rset.getInt(8))
+						.review(rset.getString(9))
+						.url(rset.getString(10))
+						.build()
+				);
+			}
+		} finally {
+			DBUtil.close(con, pstmt, rset);
+		}
+		return restaurant;
+	}	
+	
 //	6. 카테고리, 가격 기준으로 음식점 검색
 //	7. 전체검색
 //	8. 상호명 조건으로 업데이트
@@ -201,7 +240,7 @@ public class RestaurantDAO {
 	        pstmt.setInt(5, restaurant.getDistance());
 	        pstmt.setInt(6, restaurant.getWaiting_time()); 
 	        pstmt.setString(7, restaurant.getIs_able_group());
-	        pstmt.setInt(8, restaurant.getScore());
+	        pstmt.setFloat(8, restaurant.getScore());
 	        pstmt.setString(9, restaurant.getReview());
 	        pstmt.setString(10, restaurant.getUrl());
 
