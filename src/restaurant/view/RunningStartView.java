@@ -34,18 +34,6 @@ public class RunningStartView {
 		System.out.println("---- DML ----");
 		System.out.println("7. 음식점 추가");
 		RestaurantController.selectAllRestaurant();
-		RestaurantDTO.builder()
-			.rname()
-			.category()
-			.food()
-			.price()
-			.distance()
-			.waiting_time()
-			.is_able_group()
-			.score()
-			.review()	
-			.url()
-			.build()
 		RestaurantController.insertRestaurant(
 				RestaurantDTO.builder()
 					.rname("Test1")
@@ -54,7 +42,7 @@ public class RunningStartView {
 					.price(9999)
 					.distance(10)
 					.waiting_time(9)
-					.is_able_group(true)
+					.is_able_group("true")
 					.score(5)
 					.review(null)	
 					.url("url")
@@ -72,7 +60,7 @@ public class RunningStartView {
 					.price(9998)
 					.distance(20)
 					.waiting_time(19)
-					.is_able_group(false)
+					.is_able_group("false")
 					.score(1)
 					.review("hi")	
 					.url("url2")
