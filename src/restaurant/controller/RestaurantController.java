@@ -81,9 +81,9 @@ public class RestaurantController {
 		}
 	}
 
-	public static void updateRestaurantByRname(String rname) {
+	public static void updateRestaurantByRname(String rname, RestaurantDTO rest) {
 		try {
-			RunningEndView.printResult(RestaurantDAO.updateRestaurantByRname(rname));
+			RunningEndView.printResult(RestaurantDAO.updateRestaurantByRname(rname, rest));
 		} catch (SQLException e) {
 			System.out.println("updateRestaurantByRname 수정 불가.");
 			e.printStackTrace();
