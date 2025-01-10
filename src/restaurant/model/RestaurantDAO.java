@@ -164,7 +164,7 @@ public class RestaurantDAO {
 	}
 //	5. 가격, 거리 기준으로 음식점 검색
 	// select * from restaurant where category = ? and price 
-	public static ArrayList<RestaurantDTO> selectRestaurantByCategoryAndPrice(String category, int low, int high) throws SQLException {
+	public static ArrayList<RestaurantDTO> selectRestaurantByPriceAndDistance(int low, int high, int i) throws SQLException {
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
@@ -172,8 +172,8 @@ public class RestaurantDAO {
 	
 		try {
 			con = DBUtil.getConnection();
-			pstmt = con.prepareStatement("select * from restaurant where category = ? and price >= ? and price <= ?");
-			pstmt.setString(1, category);
+			pstmt = con.prepareStatement("select * from restaurant where distance = ? and price >= ? and price <= ?");
+			pstmt.setInt(1, i);
 			pstmt.setInt(2, low);
 			pstmt.setInt(3, high);
 			rset = pstmt.executeQuery();
@@ -272,10 +272,9 @@ public class RestaurantDAO {
 	}
 
 	// 8. 상호명 조건으로 (DTO있는거 가져와서)업데이트
-public static boolean updateRestaurantByCategory(String rname, RestaurantDTO rest) {
+public static boolean updateRestaurantByRname(String rname, RestaurantDTO rest) throws SQLException {
     Connection conn = null;
     PreparedStatement pstmt = null;
-    
     try {
         conn = DBUtil.getConnection();
         pstmt = conn.prepareStatement("UPDATE restaurant SET category=?, food=?, price=?, distance=?, waiting_time=?, is_able_group=?, score=?, review=?, url=? WHERE rname = ?");
@@ -290,9 +289,9 @@ public static boolean updateRestaurantByCategory(String rname, RestaurantDTO res
         pstmt.setString(9, rest.getUrl());
         pstmt.setString(10, rname);
         int result = pstmt.executeUpdate();
-        return result == 1;
-    } catch (SQLException e) {
-        e.printStackTrace();
+        if (result == 1) {
+        	return true;
+        }
     } finally {
         DBUtil.close(conn, pstmt);
     }
@@ -300,7 +299,7 @@ public static boolean updateRestaurantByCategory(String rname, RestaurantDTO res
 }
 
 	//  9. 상호명 이름으로 삭제(delete) - delete from restaurant where rname=?
-	public static boolean deleteRestaurantByName(String rname) throws SQLException {
+	public static boolean deleteRestaurantByRname(String rname) throws SQLException {
 	    Connection conn = null;
 	    PreparedStatement pstmt = null;
 
