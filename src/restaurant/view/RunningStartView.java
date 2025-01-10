@@ -85,8 +85,6 @@ public class RunningStartView {
 		RestaurantController.deleteRestaurantByRname("도락");
 		RestaurantController.selectAllRestaurant();
 		
-		//여기삭제
-		RestaurantController.insertRestaurant("1", "1", "1", "1", "1", "1", "가능", "1", "안뇽", "1123");
 		
 	}
 
