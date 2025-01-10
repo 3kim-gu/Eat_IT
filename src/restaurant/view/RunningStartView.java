@@ -46,6 +46,8 @@ public class RunningStartView {
 		RestaurantController.deleteRestaurantByCategory("양식");
 		RestaurantController.selectAllRestaurant();
 		
+		
+		
 	}
 
 }
