@@ -14,7 +14,7 @@ public class DBUtil {
 	static {
 		try {
 			dbinfo.load(new FileInputStream("./src/dbinfo.properties"));
-			Class.forName(dbinfo.getProperty("jdbc.driverClassName"));
+			Class.forName(dbinfo.getProperty("jdbc.driver"));
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -22,8 +22,8 @@ public class DBUtil {
 
 	public static Connection getConnection() throws SQLException {
 
-		return DriverManager.getConnection(dbinfo.getProperty("jdbc.url"), dbinfo.getProperty("jdbc.username"),
-				dbinfo.getProperty("jdbc.password"));
+		return DriverManager.getConnection(dbinfo.getProperty("jdbc.url"), dbinfo.getProperty("jdbc.id"),
+				dbinfo.getProperty("jdbc.pw"));
 
 	}
 
