@@ -236,12 +236,10 @@ public static boolean updateRestaurantByRname(String rname, RestaurantDTO rest) 
 
 
 ###  **주요 변경 사항 2️⃣**: 출력 양식 Stream API 활용
-- **수정 전** : toString
-<div align="center">
-  <img src="https://github.com/user-attachments/assets/50281d14-605e-439b-a0b1-1b331ff0f865" width="900" height="100">
-</div>
+- **수정 전** : ArrayList<RestaurantDTO> 타입의 반환을 Object 타입으로 받아 일괄적으로 처리
 
--  **수정 후** : ArrayList<RestaurantDTO> 타입이 반환되면 해당 객체의 사이즈를 기준으로 결과가 0개일 때와 1개 이상일때 출력 포맷을 추가
+
+- **수정 후** : ArrayList<RestaurantDTO> 타입을 인자로 하는 메소드를 새로 작성하여 해당 객체의 사이즈를 기준으로 결과가 0개일 때와 1개 이상일때 출력 포맷 추가
 
 
 
