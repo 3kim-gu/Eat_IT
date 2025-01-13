@@ -1,4 +1,5 @@
 # EAT_IT 🍜  
+<img src="https://github.com/user-attachments/assets/9de1e1ba-163a-4850-b389-8209d027b697" width="800" height="280">
 
 ## 🎯 목표  
 1️⃣ **Oracle과 JDBC**를 활용하여 **CRUD 기능**을 구현한 실습 프로젝트  
@@ -6,6 +7,7 @@
 3️⃣ **Stream API**를 활용한 데이터 처리  
 
 ---
+
 
 
 ## 🌟 **서비스 소개**  
@@ -207,9 +209,44 @@ public static boolean updateRestaurantByRname(String rname, RestaurantDTO rest) 
 ---
 
 ## ✨ Refactoring
-- **주요 변경 사항 1️**: 
+###  **주요 변경 사항 1️**: NullPointerException 예외 해결
+- **수정 전** : 기존 코드에서 Object타입의 o로 가져온 인수가 null 즉 controller에서 model로 요청한 결과가 null일 경우 o.toString() 메소드에서 NullPointerException 예외 발생
+<div align="center">
+  <img src="https://github.com/user-attachments/assets/50281d14-605e-439b-a0b1-1b331ff0f865" width="900" height="100">
+</div>
 
 
+<br>
+<br>
+
+-  **수정 후** : 1개의 RestaurantDTO 타입이 반환될 경우에는 Optional을 이용하여 null값에 대한 처리를 수행하도록 수정
+```java
+	public static void printResult(Object o) {
+		Optional <Object> container = Optional.ofNullable(o);
+		
+		System.out.println("** 검색 결과 **");
+		System.out.println(container.orElse("검색 결과가 없습니다."));
+		System.out.println("-".repeat(140) + "\n");
+	}
+```
+<div align="center">
+<img src="https://github.com/user-attachments/assets/69acbc2f-6035-440f-8fcd-01b75a585f8a"  width="800" height="120">
+</div>
+
+
+
+###  **주요 변경 사항 2️⃣**: 출력 양식 Stream API 활용
+- **수정 전** : toString
+<div align="center">
+  <img src="https://github.com/user-attachments/assets/50281d14-605e-439b-a0b1-1b331ff0f865" width="900" height="100">
+</div>
+
+-  **수정 후** : ArrayList<RestaurantDTO> 타입이 반환되면 해당 객체의 사이즈를 기준으로 결과가 0개일 때와 1개 이상일때 출력 포맷을 추가
+
+
+
+
+## 📝 회고록
 
 ---
 
