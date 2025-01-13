@@ -235,12 +235,32 @@ public static boolean updateRestaurantByRname(String rname, RestaurantDTO rest) 
 
 
 
-###  **주요 변경 사항 2️⃣**: 출력 양식 Stream API 활용
+###  **주요 변경 사항 2️⃣**: Stream API 활용하여 출력 메소드 추가 
 - **수정 전** : ArrayList<RestaurantDTO> 타입의 반환을 Object 타입으로 받아 일괄적으로 처리
 
 
 - **수정 후** : ArrayList<RestaurantDTO> 타입을 인자로 하는 메소드를 새로 작성하여 해당 객체의 사이즈를 기준으로 결과가 0개일 때와 1개 이상일때 출력 포맷 추가
-
+```java
+	public static void printResults(ArrayList<RestaurantDTO> o) {
+		System.out.println("** 검색 결과 **");
+		if (o.size() == 0) {
+			System.out.println("검색 결과가 없습니다.");
+		} else {
+			StringBuilder sb = new StringBuilder();
+			String separator = "-".repeat(150) + "\n";
+			String header = String.format(
+			        "%-20s %-15s %-15s %-10s %-10s %-15s %-15s %-10s %-20s %-30s\n",
+			        "RName", "Category", "Food", "Price", "Distance", "Waiting Time", "Able Group", "Score", "Review", "URL"
+			    );
+			sb.append(header);
+			sb.append(separator);
+			System.out.println(sb.toString());
+			
+			o.stream().forEach(System.out::println);
+		}
+		System.out.println( "-".repeat(140) + "\n");			
+	}
+```
 
 
 
