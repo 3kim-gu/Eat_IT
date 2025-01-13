@@ -1,4 +1,10 @@
 # EAT_IT 🍜
+### 사용기술
+- oracle과 JDBC를 사용하여 CRUD 기능을 구현한 실습 프로젝트
+- mvc 패턴 구조 활용
+- StreamAPI 활용
+
+  ---
 
 ### **서비스 소개**  
 **EAT_IT**은 IT 타워 근처의 맛집을 공유하는 서비스입니다.  
@@ -11,23 +17,56 @@
 ---
 
 ### 개발기간
-- 2025.01.10
+- 2025.01.06 ~ 2025.01.13
 
 ### 개발구성원
-- 구민지 
-- 김대연
-- 김리영
-- 김민성
+<table>
+  <tbody>
+    <tr>
+      <td align="center">
+         <a href="https://github.com/user0830">
+          <img src="https://avatars.githubusercontent.com/u/82265395?v=4" width="150px;" alt=""/>
+          <br /><sub><b> 구민지 </b></sub>
+        </a>
+        <br />
+      </td>
+      <td align="center">
+          <a href="https://github.com/dyoun12">
+          <img src="https://avatars.githubusercontent.com/u/107902336?v=4" width="150px;" alt=""/>
+          <br /><sub><b> 김대연 </b></sub>
+        </a>
+        <br />
+      </td>
+      <td align="center">
+        <a href="https://github.com/riyeong0916">
+          <img src="https://avatars.githubusercontent.com/u/193798531?v=4" width="150px;" alt=""/>
+          <br /><sub><b> 김리영 </b></sub>
+        </a>
+        <br />
+      </td>
+      <td align="center">
+        <a href="https://github.com/minsung159357">
+          <img src="https://avatars.githubusercontent.com/u/87555330?v=4" width="150px;" alt=""/>
+          <br /><sub><b> 김민성 </b></sub>
+        </a>
+        <br />
+      </td>
+    </tr>
+  </tbody>
+</table>
+
 
 ### 아키텍처 구조
+
+- 
+
 <img src = https://github.com/user-attachments/assets/c041245e-efd5-4e0c-a4fa-e0727a4c7aed width = "600" height = "300"></img>
 
-### DB entity 구조
+### ERD
 <img src = https://github.com/user-attachments/assets/7f087f30-70db-4bc5-af2b-d5efd92c0c26 width = "180" height = "300"></img>
 
-## 초기 서비스 기능
-우리 서비스의 초기 기능과 구현 예정 기능은 아래와 같습니다.
 
+---
 ### 구현된 기능
 | 기능                        | 상세 기능                                                               |
 |-----------------------------|--------------------------------------------------------------------------|
@@ -40,15 +79,15 @@
 | **상호명 조건으로 업데이트**   | 음식점의 상호명을 기준으로 데이터를 업데이트                        |
 | **상호명 조건으로 삭제**       | 특정 음식점을 상호명을 기준으로 삭제                               |
 | **음식점 추가**              | 새로운 음식점을 추가하는 기능                                        |
-
+| **카테고리, 가격 기준으로 음식점 검색** | 카테고리와 가격 조건을 동시에 설정하여 음식점을 검색할 수 있는 기능      |
 
 ---
 
 
-### 구현 예정 기능
+### Refactoring
 | 기능                              | 상세 기능                                                                    |
 |-----------------------------------|-------------------------------------------------------------------------------|
-| **카테고리, 가격 기준으로 음식점 검색** | 카테고리와 가격 조건을 동시에 설정하여 음식점을 검색할 수 있는 기능      |
+
 
 
 ---
