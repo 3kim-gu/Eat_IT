@@ -19,11 +19,6 @@ public class RestaurantDAO {
 	@Test
 	public void Test()	{
 		try {
-//			ArrayList<RestaurantDTO> rd = RestaurantDAO.selectRestaurantByCategory("양식");
-//			ArrayList<RestaurantDTO> rd = RestaurantDAO.selectRestaurantByPrice(5000, 10000);
-//			ArrayList<RestaurantDTO> rd = selectRestaurantByDistance(5);
-//			RestaurantDTO rd = selectRestaurantByRname("이");
-//			ArrayList<RestaurantDTO> rd = RestaurantDAO.selectRestaurantByCategoryAndPrice("양식", 0, 15000);
 			ArrayList<RestaurantDTO> rd = selectRestaurantByCategoryAndPrice("양식", 0, 15000);
 			System.out.println(rd);
 		} catch (SQLException e) {
@@ -31,7 +26,8 @@ public class RestaurantDAO {
 			e.printStackTrace();
 		}
 	}
-//	1. 메뉴 카테고리로 음식점 검색
+	
+	//	1. 메뉴 카테고리로 음식점 검색
 	public static ArrayList<RestaurantDTO> selectRestaurantByCategory(String category) throws SQLException {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
@@ -64,7 +60,8 @@ public class RestaurantDAO {
 		}
 		return restaurant;
 	}
-//	2. 가격 범위로 음식점 검색
+	
+	//	2. 가격 범위로 음식점 검색
 	public static ArrayList<RestaurantDTO> selectRestaurantByPrice(int low, int high) throws SQLException {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
@@ -98,13 +95,14 @@ public class RestaurantDAO {
 		}
 		return restaurant;
 	}
-//	3. 거리순으로 음식점 검색
+	
+	//	3. 거리순으로 음식점 검색
 	public static ArrayList<RestaurantDTO> selectRestaurantByDistance(int min) throws SQLException {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		ArrayList<RestaurantDTO> restaurant = new ArrayList<>();
-
+		
 		try {
 			conn = DBUtil.getConnection();
 			pstmt = conn.prepareStatement("select * from restaurant where distance<=?");
@@ -131,7 +129,8 @@ public class RestaurantDAO {
 		}
 		return restaurant;
 	}
-//	4. 음식점 이름으로 음식점 검색
+	
+	//	4. 음식점 이름으로 음식점 검색
 	public static RestaurantDTO selectRestaurantByRname(String rname) throws SQLException {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
@@ -162,8 +161,8 @@ public class RestaurantDAO {
 		}
 		return restaurant;
 	}
-//	5. 가격, 거리 기준으로 음식점 검색
-	// select * from restaurant where category = ? and price 
+	
+	//	5. 가격, 거리 기준으로 음식점 검색
 	public static ArrayList<RestaurantDTO> selectRestaurantByPriceAndDistance(int low, int high, int i) throws SQLException {
 		Connection con = null;
 		PreparedStatement pstmt = null;
@@ -199,7 +198,7 @@ public class RestaurantDAO {
 		return restaurant;
 	}	
 	
-//	6. 카테고리, 가격 기준으로 음식점 검색
+	//	6. 카테고리, 가격 기준으로 음식점 검색
 	public static ArrayList<RestaurantDTO> selectRestaurantByCategoryAndPrice(String category, int low, int high) throws SQLException {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
@@ -234,10 +233,6 @@ public class RestaurantDAO {
 		}
 		return restaurant;
 	}
-//	7. 전체검색
-//	8. 상호명 조건으로 업데이트
-//	9. 상호명 조건으로 삭제
-//	10. 음식점 추가
 
 	// 7. 전체검색
 	public static ArrayList<RestaurantDTO> selectAllRestaurant() throws SQLException {
@@ -272,33 +267,33 @@ public class RestaurantDAO {
 	}
 
 	// 8. 상호명 조건으로 (DTO있는거 가져와서)업데이트
-public static boolean updateRestaurantByRname(String rname, RestaurantDTO rest) throws SQLException {
-    Connection conn = null;
-    PreparedStatement pstmt = null;
-    try {
-        conn = DBUtil.getConnection();
-        pstmt = conn.prepareStatement("UPDATE restaurant SET category=?, food=?, price=?, distance=?, waiting_time=?, is_able_group=?, score=?, review=?, url=? WHERE rname = ?");
-        pstmt.setString(1, rest.getCategory());
-        pstmt.setString(2, rest.getFood());
-        pstmt.setInt(3, rest.getPrice());
-        pstmt.setInt(4, rest.getDistance());
-        pstmt.setInt(5, rest.getWaiting_time());
-        pstmt.setString(6, rest.getIs_able_group());
-        pstmt.setFloat(7, rest.getScore());
-        pstmt.setString(8, rest.getReview());
-        pstmt.setString(9, rest.getUrl());
-        pstmt.setString(10, rname);
-        int result = pstmt.executeUpdate();
-        if (result == 1) {
-        	return true;
-        }
-    } finally {
-        DBUtil.close(conn, pstmt);
-    }
-    return false;
-}
+	public static boolean updateRestaurantByRname(String rname, RestaurantDTO rest) throws SQLException {
+	    Connection conn = null;
+	    PreparedStatement pstmt = null;
+	    try {
+	        conn = DBUtil.getConnection();
+	        pstmt = conn.prepareStatement("UPDATE restaurant SET category=?, food=?, price=?, distance=?, waiting_time=?, is_able_group=?, score=?, review=?, url=? WHERE rname = ?");
+	        pstmt.setString(1, rest.getCategory());
+	        pstmt.setString(2, rest.getFood());
+	        pstmt.setInt(3, rest.getPrice());
+	        pstmt.setInt(4, rest.getDistance());
+	        pstmt.setInt(5, rest.getWaiting_time());
+	        pstmt.setString(6, rest.getIs_able_group());
+	        pstmt.setFloat(7, rest.getScore());
+	        pstmt.setString(8, rest.getReview());
+	        pstmt.setString(9, rest.getUrl());
+	        pstmt.setString(10, rname);
+	        int result = pstmt.executeUpdate();
+	        if (result == 1) {
+	        	return true;
+	        }
+	    } finally {
+	        DBUtil.close(conn, pstmt);
+	    }
+	    return false;
+	}
 
-	//  9. 상호명 이름으로 삭제(delete) - delete from restaurant where rname=?
+	//  9. 상호명 이름으로 삭제(delete)
 	public static boolean deleteRestaurantByRname(String rname) throws SQLException {
 	    Connection conn = null;
 	    PreparedStatement pstmt = null;
@@ -316,8 +311,6 @@ public static boolean updateRestaurantByRname(String rname, RestaurantDTO rest) 
 	}
 	
 	// 10. 음식점 추가(insert)
-	// 음식점 추가
-	
 	public static boolean insertRestaurant(RestaurantDTO restaurant) throws SQLException {
 	    Connection conn = null;
 	    PreparedStatement pstmt = null;

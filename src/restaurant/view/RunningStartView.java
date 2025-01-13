@@ -7,32 +7,35 @@ public class RunningStartView {
 
 	public static void main(String[] args) {
 		System.out.println("Eat it!");
-		
-		System.out.println("---- DQL ----");
-		System.out.println("\n 0. 전체 음식점 검색");
+		System.out.println("""
+				!~!~ WELLCOME ~!~! 
+				EAT_IT은 IT 타워 근처의 맛집을 공유하는 서비스입니다.
+				""");
+		System.out.println("\n ---- 검색 ----");
+		System.out.println("0. 전체 음식점 검색");
 		RestaurantController.selectAllRestaurant();
 		
-		System.out.println("\n 1. 메뉴 카테고리로 음식점 검색");
+		System.out.println("1. 메뉴 카테고리로 음식점 검색");
 		RestaurantController.selectRestaurantByCategory("양식");
 		
-		System.out.println("\n 2. 가격 범위로 음식점 검색");
+		System.out.println("2. 가격 범위로 음식점 검색");
 		RestaurantController.selectRestaurantByPrice(0, 15000);
 		
-		System.out.println("\n 3. 거리순으로 음식점 검색");
+		System.out.println("3. 거리순으로 음식점 검색");
 		RestaurantController.selectRestaurantByDistance(5);
 		
-		System.out.println("\n 4. 음식점 이름으로 음식점 검색");
+		System.out.println("4. 음식점 이름으로 음식점 검색");
 		RestaurantController.selectRestaurantByRname("도락");
 		
-		System.out.println("\n 5. 가격, 거리 기준으로 음식점 검색");
+		System.out.println("5. 가격, 거리 기준으로 음식점 검색");
 		RestaurantController.selectRestaurantByPriceAndDistance(0, 15000, 5);
 		
-		System.out.println("\n 6. 카테고리, 가격 기준으로 음식점 검색");
+		System.out.println("6. 카테고리, 가격 기준으로 음식점 검색");
 		RestaurantController.selectRestaurantByCategoryAndPrice("양식", 0, 15000);
 		
 		
-		System.out.println("---- DML ----");
-		System.out.println("\n 7. 음식점 추가");
+		System.out.println("\n\n---- 추가 ----");
+		System.out.println("7. 음식점 추가");
 		RestaurantController.selectAllRestaurant();
 		RestaurantController.insertRestaurant(
 				RestaurantDTO.builder()
@@ -50,7 +53,9 @@ public class RunningStartView {
 				);
 		RestaurantController.selectAllRestaurant();
 		
-		System.out.println("\n 7. 음식점 이름으로 음식점 업데이트");
+		
+		System.out.println("\n\n---- 수정 ----");
+		System.out.println("7. 음식점 이름으로 음식점 업데이트");
 		RestaurantController.selectAllRestaurant();
 		RestaurantController.updateRestaurantByRname(
 				"도락", 
@@ -68,7 +73,9 @@ public class RunningStartView {
 				);
 		RestaurantController.selectAllRestaurant();
 		
-		System.out.println("\n 8. 음식점 이름으로 음식점 삭제");
+		
+		System.out.println("\n\n---- 삭제 ----");
+		System.out.println("8. 음식점 이름으로 음식점 삭제");
 		RestaurantController.selectAllRestaurant();
 		RestaurantController.deleteRestaurantByRname("도락");
 		RestaurantController.selectAllRestaurant();

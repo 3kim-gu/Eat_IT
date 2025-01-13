@@ -1,5 +1,7 @@
 package restaurant.domain;
 
+import java.util.Optional;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -24,38 +26,22 @@ public class RestaurantDTO {
 	
 	@Override
 	public String toString() {
+		Optional<String> container = Optional.ofNullable(review);
+	    String row = String.format(
+	        "%-20s %-15s %-15s %-10d %-10d %-15d %-15s %-10.1f %-20s %-30s\n",
+	        rname, 
+	        category, 
+	        food, 
+	        price, 
+	        distance, 
+	        waiting_time, 
+	        is_able_group, 
+	        score, 
+	        container.orElse("리뷰가 없습니다."), 
+	        url
+	    );
 		StringBuilder builder = new StringBuilder();
-		builder.append("상호명 : ");
-		builder.append(rname);
-		builder.append("|");
-		builder.append(", 음식종류 : ");
-		builder.append(category);
-		builder.append("|");
-		builder.append(", 메뉴 :");
-		builder.append(food);
-		builder.append("|");
-		builder.append(", 가격 : ");
-		builder.append(price);
-		builder.append("|");
-		builder.append(", 도보(분) : ");
-		builder.append(distance);
-		builder.append("|");
-		builder.append(", 대기시간 : ");
-		builder.append(waiting_time);
-		builder.append("|");
-		builder.append(", 단체가능여부: ");
-		builder.append(is_able_group);
-		builder.append("|");
-		builder.append(", 평점: ");
-		builder.append(score);
-		builder.append("|");
-		builder.append(", 후기: ");
-		builder.append(review);
-		builder.append("|");
-		builder.append(", 홈페이지: ");
-		builder.append(url);
-		builder.append("|");
-		builder.append("\n");
+		builder.append(row);
 		return builder.toString();
 	}
 }
