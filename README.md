@@ -1,5 +1,5 @@
 # EAT_IT 🍜  
-<img src="https://github.com/user-attachments/assets/9de1e1ba-163a-4850-b389-8209d027b697" width="800" height="280">
+<img src="https://github.com/user-attachments/assets/9de1e1ba-163a-4850-b389-8209d027b697" width="800" height="330">
 
 ## 🎯 목표  
 1️⃣ **Oracle과 JDBC**를 활용하여 **CRUD 기능**을 구현한 실습 프로젝트  
@@ -15,11 +15,20 @@
 - **"이것(IT)을 먹다(EAT)"**  
 - **"IT 타워(IT) 근처에서 먹다(EAT)"**  
 - 먼 미래에는 "우리가 IT를 씹어먹겠다"는 의지를 담았습니다!
+  <br>
   
 ---
 
 ## 🗓️ 개발기간
 - 2025.01.06 ~ 2025.01.13
+<br>
+
+## 🚀 사용기술
+### DEVELOPMENT
+![js](https://img.shields.io/badge/Java-ED8B00?style=for-the-badge&logo=openjdk&logoColor=white)
+![js](https://img.shields.io/badge/Oracle-F80000?style=for-the-badge&logo=oracle&logoColor=black)
+<br>
+<br>
 
 ## 👥 개발구성원
 <table>
@@ -73,7 +82,7 @@
 ---
 
 ## 🗃️ ERD
-<img src = https://github.com/user-attachments/assets/7f087f30-70db-4bc5-af2b-d5efd92c0c26 width = "180" height = "300"></img>
+![ERD](https://github.com/user-attachments/assets/6c023ee0-dfdb-46a0-9d49-bb6faf71c61e)
 
 
 ---
@@ -210,16 +219,16 @@ public static boolean updateRestaurantByRname(String rname, RestaurantDTO rest) 
 
 ## ✨ Refactoring
 ###  **주요 변경 사항 1️**: NullPointerException 예외 해결
-- **수정 전** : 기존 코드에서 Object타입의 o로 가져온 인수가 null 즉 controller에서 model로 요청한 결과가 null일 경우 o.toString() 메소드에서 NullPointerException 예외 발생
+- **문제** : 기존 코드에서 Object타입의 o로 가져온 인수가 null 즉 controller에서 model로 요청한 결과가 null일 경우 o.toString() 메소드에서 NullPointerException 예외 발생
 <div align="center">
-  <img src="https://github.com/user-attachments/assets/50281d14-605e-439b-a0b1-1b331ff0f865" width="900" height="100">
+  <img src="https://github.com/user-attachments/assets/50281d14-605e-439b-a0b1-1b331ff0f865" width="900" height="110">
 </div>
 
 
 <br>
 <br>
 
--  **수정 후** : 1개의 RestaurantDTO 타입이 반환될 경우에는 Optional을 이용하여 null값에 대한 처리를 수행하도록 수정
+-  **해결** : 1개의 RestaurantDTO 타입이 반환될 경우에는 Optional을 이용하여 null값에 대한 처리를 수행하도록 수정
 ```java
 	public static void printResult(Object o) {
 		Optional <Object> container = Optional.ofNullable(o);
@@ -230,16 +239,16 @@ public static boolean updateRestaurantByRname(String rname, RestaurantDTO rest) 
 	}
 ```
 <div align="center">
-<img src="https://github.com/user-attachments/assets/69acbc2f-6035-440f-8fcd-01b75a585f8a"  width="800" height="120">
+<img src="https://github.com/user-attachments/assets/69acbc2f-6035-440f-8fcd-01b75a585f8a"  width="800" height="130">
 </div>
 
 
 
 ###  **주요 변경 사항 2️⃣**: Stream API 활용하여 출력 메소드 추가 
-- **수정 전** : ArrayList<RestaurantDTO> 타입의 반환을 Object 타입으로 받아 일괄적으로 처리
+- **필요성** : ArrayList<RestaurantDTO> 타입의 반환을 Object 타입으로 받아 일괄적으로 처리
 
 
-- **수정 후** : ArrayList<RestaurantDTO> 타입을 인자로 하는 메소드를 새로 작성하여 해당 객체의 사이즈를 기준으로 결과가 0개일 때와 1개 이상일때 출력 포맷 추가
+- **개선** : ArrayList<RestaurantDTO> 타입을 인자로 하는 메소드를 새로 작성하여 해당 객체의 사이즈를 기준으로 결과가 0개일 때와 1개 이상일때 출력 포맷 추가
 ```java
 	public static void printResults(ArrayList<RestaurantDTO> o) {
 		System.out.println("** 검색 결과 **");
@@ -264,7 +273,7 @@ public static boolean updateRestaurantByRname(String rname, RestaurantDTO rest) 
 
 
 
-## 📝 회고록
+## 📝 프로젝트 후기
 
 ---
 
@@ -273,5 +282,16 @@ public static boolean updateRestaurantByRname(String rname, RestaurantDTO rest) 
 
 뿐만아니라 MVC 패턴에 대한 이해와 다형성을 이용한 OOP 개발 방법론을 학습할 수 있었고, JDBC를 이용한 db연동을 실습해볼 수 있었습니다. 이 과 팀원분들과 프로젝트 기간동안 기초 개념부터 함께 학습해나가면서 같이 성장할 수 있었다고 생각합니다.
 
+### 구민지
+DML 작성 시 가장 유의할 점은 선언된 타입값을 맞추어 작성하는 것인데, 한 속성값을 반환값이 true, false인  boolean을
+사용해 선언하려고 했는데, Oracle에서는 boolean타입이 존재하지 않음을 학습하게 되었습니다.
+그리고 선언된 변수 값과 길이가 맞지 않아서 오류가 발생하기도 하였습니다.
+
+하나의 클래스안에서 여러 메소드를 각자 맡아 작성을 했기에 git을 통해 main 브랜치로 commit하는 과정에서 
+충돌이 많았습니다. 그래서 main 브랜치의 코드가 사라지는 것을 방지 하기위해 main브랜치 전에 사전에 병합하는 
+mainpreview 브랜치를 생성해 코드가 사라는것을 방지하려고 노력했습니다.
+
+프로젝트를 진행하면서 팀원끼리 먼저 코드 규칙 명명을 통해 규칙을 만들고
+어떤 구조로 프로젝트를 만들지 미리 꼼꼼하게 계획하는것이 중요하다고 느꼈습니다.
 
 
